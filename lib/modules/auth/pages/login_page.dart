@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privshare/modules/auth/controllers/login_controller.dart';
+import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({
@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final LoginController controller;
+  final AuthController controller;
 
   final _formKey = GlobalKey<FormState>();
   final usernameCtrl = TextEditingController();

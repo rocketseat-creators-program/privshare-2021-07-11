@@ -44,6 +44,14 @@ class TimelinePage extends StatelessWidget {
       text: 'Mensagem para assinantes 2...',
       isSubscribersOnly: true,
     ),
+    TimelineItem(
+      text: 'Mensagem 5...',
+      isSubscribersOnly: false,
+    ),
+    TimelineItem(
+      text: 'Mensagem para assinantes 3...',
+      isSubscribersOnly: true,
+    ),
   ];
 
   @override
@@ -96,12 +104,20 @@ class TimelinePage extends StatelessWidget {
                             child: Center(
                               child: (item.isSubscribersOnly)
                                   ? controller.user.value?.isSubscriber ?? false
-                                      ? Text(
-                                          item.text,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          ),
+                                      ? Column(
+                                          children: [
+                                            Image.asset('assets/premium.jpg'),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              item.text,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
                                         )
                                       : Text(
                                           'Conteúdo exclusivo para assinantes!')

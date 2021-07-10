@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:privshare/core/routes/middlewares/is_not_logged_middleware.dart';
-import 'package:privshare/modules/auth/bindings/login_binding.dart';
 import 'package:privshare/modules/auth/pages/login_page.dart';
 import 'package:privshare/modules/timeline/pages/timeline_page.dart';
 
@@ -28,7 +27,6 @@ class Routes {
   static List<GetPage> pages = [
     GetPage(
       name: LOGIN.name,
-      binding: LoginBinding(),
       middlewares: [
         IsNotLoggedMiddlware(),
       ],

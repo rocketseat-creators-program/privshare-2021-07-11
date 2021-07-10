@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:privshare/core/routes/routes.dart';
+import 'package:privshare/modules/app/controllers/app_controller.dart';
 import 'package:privshare/modules/auth/models/user_model.dart';
 import 'package:privshare/modules/auth/repository/user_repository.dart';
 
 class AuthController extends GetxController {
   final UserRepository repository;
+  final AppController appController;
   final Rx<UserModel?> user = Rx(null);
 
-  AuthController(this.repository);
+  AuthController({
+    required this.repository,
+    required this.appController,
+  });
 
   @override
   void onInit() {
@@ -26,6 +31,8 @@ class AuthController extends GetxController {
         }
       });
 
+      repository.saveLocalUser(user.value!);
+
       if (user.value!.isSubscriber) {
         Get.snackbar(
           'Seja bem vindo!',
@@ -38,17 +45,36 @@ class AuthController extends GetxController {
     }
   }
 
-  void saveUser(UserModel _user) {
-    repository.saveLocalUser(_user);
-
-    user.value = _user;
-  }
-
   void logout() {
     repository.removeLocalUser();
 
     user.value = null;
 
     Get.offAllNamed(Routes.LOGIN.path);
+  }
+
+  login(String username, String password) async {
+    appController.setIsLoading(true);
+
+    await Future.delayed(
+      Duration(milliseconds: 300),
+    );
+
+    if (password != 'subscribed' && password != 'password') {
+      appController.setErrorMessage('Usuário e/ou senha estão incorretos');
+    } else {
+      final _user = UserModel(
+        username: username,
+        isSubscriber: (password == 'subscribed'),
+      );
+
+      repository.saveLocalUser(_user);
+
+      user.value = _user;
+
+      appController.setIsLoading(false);
+
+      Get.offAllNamed(Routes.DASHBOARD.path);
+    }
   }
 }

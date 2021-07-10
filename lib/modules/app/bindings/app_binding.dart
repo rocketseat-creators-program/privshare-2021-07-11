@@ -23,7 +23,8 @@ class AppBinding implements Bindings {
 
     Get.lazyPut<AuthController>(
       () => AuthController(
-        Get.find(),
+        appController: Get.find(),
+        repository: Get.find(),
       ),
     );
   }
