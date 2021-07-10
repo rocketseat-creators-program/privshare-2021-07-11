@@ -1,8 +1,3 @@
-import 'package:get/get.dart';
-import 'package:privshare/core/routes/middlewares/is_not_logged_middleware.dart';
-import 'package:privshare/modules/auth/pages/login_page.dart';
-import 'package:privshare/modules/timeline/pages/timeline_page.dart';
-
 // class Route {
 //   final String name;
 //   final String path;
@@ -12,6 +7,13 @@ import 'package:privshare/modules/timeline/pages/timeline_page.dart';
 //     required this.path,
 //   });
 // }
+
+import 'package:flutter/material.dart';
+import 'package:privshare/core/handlers/error_and_loader_state_handler.dart';
+import 'package:privshare/modules/app/controllers/app_controller.dart';
+import 'package:privshare/modules/auth/controllers/auth_controller.dart';
+import 'package:privshare/modules/auth/pages/login_page.dart';
+import 'package:privshare/modules/auth/repository/user_repository.dart';
 
 class Routes {
   // static const LOGIN = Route(
@@ -27,22 +29,14 @@ class Routes {
   static const LOGIN = 'login';
   static const TIMELINE = 'timeline';
 
-  static List<GetPage> pages = [
-    GetPage(
-      // name: LOGIN.name,
-      name: LOGIN,
-      middlewares: [
-        IsNotLoggedMiddlware(),
-      ],
-      page: () => LoginPage(
-        controller: Get.find(),
-      ),
-    ),
-    GetPage(
-      name: TIMELINE,
-      page: () => TimelinePage(
-        controller: Get.find(),
-      ),
-    ),
-  ];
+  static final Map<String, Widget Function(BuildContext)> routes = {
+    LOGIN: (_) => LoginPage(
+          controller: AuthController(
+            appController: AppController(
+              ErrorAndLoaderStateHandler(),
+            ),
+            repository: UserRepository(),
+          ),
+        ),
+  };
 }

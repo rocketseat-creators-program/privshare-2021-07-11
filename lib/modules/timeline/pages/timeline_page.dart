@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 
 class TimelineItem {
@@ -60,12 +59,10 @@ class TimelinePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Timeline'),
         leading: IconButton(
-          icon: Obx(
-            () => Icon(
-              (controller.user.value?.isSubscriber ?? false)
-                  ? Icons.check_box
-                  : Icons.check_box_outline_blank,
-            ),
+          icon: Icon(
+            (controller.user?.isSubscriber ?? false)
+                ? Icons.check_box
+                : Icons.check_box_outline_blank,
           ),
           onPressed: () => controller.subscribeToggle(),
         ),
@@ -78,59 +75,57 @@ class TimelinePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Obx(
-          () => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Bem vindo, ${controller.user.value?.username ?? ''}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Bem vindo, ${controller.user?.username ?? ''}',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: ListView(
-                  children: items
-                      .map(
-                        (item) => Card(
-                          color: (item.isSubscribersOnly)
-                              ? Colors.amber
-                              : Colors.blue,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Center(
-                              child: (item.isSubscribersOnly)
-                                  ? controller.user.value?.isSubscriber ?? false
-                                      ? Column(
-                                          children: [
-                                            Image.asset('assets/premium.jpg'),
-                                            SizedBox(
-                                              height: 10,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView(
+                children: items
+                    .map(
+                      (item) => Card(
+                        color: (item.isSubscribersOnly)
+                            ? Colors.amber
+                            : Colors.blue,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Center(
+                            child: (item.isSubscribersOnly)
+                                ? controller.user?.isSubscriber ?? false
+                                    ? Column(
+                                        children: [
+                                          Image.asset('assets/premium.jpg'),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            item.text,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black,
                                             ),
-                                            Text(
-                                              item.text,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      : Text(
-                                          'Conteúdo exclusivo para assinantes!')
-                                  : Text(item.text),
-                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Text(
+                                        'Conteúdo exclusivo para assinantes!')
+                                : Text(item.text),
                           ),
                         ),
-                      )
-                      .toList(),
-                ),
+                      ),
+                    )
+                    .toList(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

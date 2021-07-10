@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -31,7 +30,7 @@ class LoginPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'username',
                 ),
-                validator: (username) => !GetUtils.isUsername(username!)
+                validator: (username) => username == null || username.isEmpty
                     ? 'Username inválido'
                     : null,
               ),
@@ -76,9 +75,9 @@ class LoginPage extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        if (!Get.isSnackbarOpen!) {
-                          Get.snackbar('Ops!', 'Tela em construção');
-                        }
+                        // if (!Get.isSnackbarOpen!) {
+                        //   Get.snackbar('Ops!', 'Tela em construção');
+                        // }
                       },
                       child: Text('Cadastre-se'),
                     ),

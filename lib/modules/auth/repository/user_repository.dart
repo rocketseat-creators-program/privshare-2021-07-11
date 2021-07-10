@@ -1,13 +1,10 @@
-import 'package:get_storage/get_storage.dart';
 import 'package:privshare/modules/auth/models/user_model.dart';
 
 class UserRepository {
-  final GetStorage box;
-
-  UserRepository(this.box);
+  UserRepository();
 
   UserModel? getLocalUser() {
-    final user = box.read('user');
+    final user = null;
 
     if (user == null) return null;
 
@@ -16,11 +13,7 @@ class UserRepository {
     if (user is String) return UserModel.fromJson(user);
   }
 
-  void saveLocalUser(UserModel user) {
-    box.write('user', user);
-  }
+  void saveLocalUser(UserModel user) {}
 
-  void removeLocalUser() {
-    box.remove('user');
-  }
+  void removeLocalUser() {}
 }
