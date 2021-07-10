@@ -1,16 +1,8 @@
 # privshare
 
-A new Flutter project.
+![ezgif-3-96780cef2b24](https://user-images.githubusercontent.com/11702749/125173384-74bf4180-e195-11eb-95d0-087ab28f312a.gif)
 
-## Getting Started
+## Links
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [GetX](https://pub.dev/packages/get)
+- [Get Storage](https://pub.dev/packages/get_storage)
