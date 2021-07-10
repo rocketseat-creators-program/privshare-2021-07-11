@@ -54,6 +54,8 @@ class LoginPage extends StatelessWidget {
                             usernameCtrl.text,
                             passwordCtrl.text,
                           );
+
+                          Navigator.of(context).pushNamed('timeline');
                         }
                       },
                       icon: Icon(Icons.login),

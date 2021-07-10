@@ -13,7 +13,11 @@ import 'package:privshare/core/handlers/error_and_loader_state_handler.dart';
 import 'package:privshare/modules/app/controllers/app_controller.dart';
 import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 import 'package:privshare/modules/auth/pages/login_page.dart';
+import 'package:privshare/modules/auth/repository/auth_repository.dart';
 import 'package:privshare/modules/auth/repository/user_repository.dart';
+import 'package:privshare/modules/timeline/controllers/timeline_controller.dart';
+import 'package:privshare/modules/timeline/pages/timeline_page.dart';
+import 'package:privshare/modules/timeline/repositories/timeline_repository.dart';
 
 class Routes {
   // static const LOGIN = Route(
@@ -29,14 +33,28 @@ class Routes {
   static const LOGIN = 'login';
   static const TIMELINE = 'timeline';
 
-  static final Map<String, Widget Function(BuildContext)> routes = {
-    LOGIN: (_) => LoginPage(
-          controller: AuthController(
-            appController: AppController(
-              ErrorAndLoaderStateHandler(),
-            ),
-            repository: UserRepository(),
+  static Map<String, Widget Function(BuildContext)> routes() {
+    final appController = AppController(
+      ErrorAndLoaderStateHandler(),
+    );
+
+    final authController = AuthController(
+      appController: appController,
+      authRepository: AuthRepository(),
+      userRepository: UserRepository(),
+    );
+
+    return {
+      LOGIN: (_) => LoginPage(
+            controller: authController,
           ),
-        ),
-  };
+      TIMELINE: (_) => TimelinePage(
+            authController: authController,
+            timelineController: TimelineController(
+              appController: appController,
+              timelineRepository: TimelineRepository(),
+            ),
+          ),
+    };
+  }
 }

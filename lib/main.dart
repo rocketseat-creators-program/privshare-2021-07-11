@@ -11,7 +11,7 @@ void main() async {
       // initialRoute: Routes.LOGIN.path,
       theme: Themes.light,
       darkTheme: Themes.dark,
-      routes: Routes.routes,
+      routes: Routes.routes(),
     ),
   );
 }

@@ -1,57 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:privshare/modules/auth/controllers/auth_controller.dart';
-
-class TimelineItem {
-  final String text;
-  final bool isSubscribersOnly;
-
-  TimelineItem({
-    required this.text,
-    required this.isSubscribersOnly,
-  });
-}
+import 'package:privshare/modules/timeline/controllers/timeline_controller.dart';
 
 class TimelinePage extends StatelessWidget {
   TimelinePage({
     Key? key,
-    required this.controller,
+    required this.authController,
+    required this.timelineController,
   }) : super(key: key);
 
-  final AuthController controller;
-  final List<TimelineItem> items = [
-    TimelineItem(
-      text: 'Mensagem...',
-      isSubscribersOnly: false,
-    ),
-    TimelineItem(
-      text: 'Mensagem 2...',
-      isSubscribersOnly: false,
-    ),
-    TimelineItem(
-      text: 'Mensagem para assinantes...',
-      isSubscribersOnly: true,
-    ),
-    TimelineItem(
-      text: 'Mensagem 3...',
-      isSubscribersOnly: false,
-    ),
-    TimelineItem(
-      text: 'Mensagem 4...',
-      isSubscribersOnly: false,
-    ),
-    TimelineItem(
-      text: 'Mensagem para assinantes 2...',
-      isSubscribersOnly: true,
-    ),
-    TimelineItem(
-      text: 'Mensagem 5...',
-      isSubscribersOnly: false,
-    ),
-    TimelineItem(
-      text: 'Mensagem para assinantes 3...',
-      isSubscribersOnly: true,
-    ),
-  ];
+  final AuthController authController;
+  final TimelineController timelineController;
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +19,15 @@ class TimelinePage extends StatelessWidget {
         title: Text('Timeline'),
         leading: IconButton(
           icon: Icon(
-            (controller.user?.isSubscriber ?? false)
+            (authController.user?.isSubscriber ?? false)
                 ? Icons.check_box
                 : Icons.check_box_outline_blank,
           ),
-          onPressed: () => controller.subscribeToggle(),
+          onPressed: () => authController.subscribeToggle(),
         ),
         actions: [
           IconButton(
-            onPressed: () => controller.logout(),
+            onPressed: () => authController.logout(),
             icon: Icon(Icons.logout),
           ),
         ],
@@ -79,7 +38,7 @@ class TimelinePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Bem vindo, ${controller.user?.username ?? ''}',
+              'Bem vindo, ${authController.user?.username ?? ''}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -89,7 +48,7 @@ class TimelinePage extends StatelessWidget {
             ),
             Expanded(
               child: ListView(
-                children: items
+                children: timelineController.posts
                     .map(
                       (item) => Card(
                         color: (item.isSubscribersOnly)
@@ -99,7 +58,7 @@ class TimelinePage extends StatelessWidget {
                           padding: const EdgeInsets.all(20),
                           child: Center(
                             child: (item.isSubscribersOnly)
-                                ? controller.user?.isSubscriber ?? false
+                                ? authController.user?.isSubscriber ?? false
                                     ? Column(
                                         children: [
                                           Image.asset('assets/premium.jpg'),
