@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:privshare/modules/auth/controllers/user_controller.dart';
+import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 
 class TimelineItem {
   final String text;
@@ -18,7 +18,7 @@ class TimelinePage extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final UserController controller;
+  final AuthController controller;
   final List<TimelineItem> items = [
     TimelineItem(
       text: 'Mensagem...',

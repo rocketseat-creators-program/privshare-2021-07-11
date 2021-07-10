@@ -7,7 +7,7 @@ class LoginBinding implements Bindings {
     Get.lazyPut<LoginController>(
       () => LoginController(
         appController: Get.find(),
-        userController: Get.find(),
+        authController: Get.find(),
       ),
     );
   }

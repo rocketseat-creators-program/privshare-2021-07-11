@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
 import 'package:privshare/core/routes/routes.dart';
 import 'package:privshare/modules/app/controllers/app_controller.dart';
-import 'package:privshare/modules/auth/controllers/user_controller.dart';
+import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 import 'package:privshare/modules/auth/models/user_model.dart';
 
 class LoginController extends GetxController {
-  final UserController userController;
+  final AuthController authController;
   final AppController appController;
 
   LoginController({
-    required this.userController,
+    required this.authController,
     required this.appController,
   });
 
@@ -28,7 +28,7 @@ class LoginController extends GetxController {
         isSubscriber: (password == 'subscribed'),
       );
 
-      userController.save(user);
+      authController.saveUser(user);
 
       appController.setIsLoading(false);
 

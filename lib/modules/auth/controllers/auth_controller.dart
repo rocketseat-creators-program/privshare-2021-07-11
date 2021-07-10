@@ -4,11 +4,11 @@ import 'package:privshare/core/routes/routes.dart';
 import 'package:privshare/modules/auth/models/user_model.dart';
 import 'package:privshare/modules/auth/repository/user_repository.dart';
 
-class UserController extends GetxController {
+class AuthController extends GetxController {
   final UserRepository repository;
   final Rx<UserModel?> user = Rx(null);
 
-  UserController(this.repository);
+  AuthController(this.repository);
 
   @override
   void onInit() {
@@ -38,7 +38,7 @@ class UserController extends GetxController {
     }
   }
 
-  void save(UserModel _user) {
+  void saveUser(UserModel _user) {
     repository.saveLocalUser(_user);
 
     user.value = _user;
