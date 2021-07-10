@@ -50,7 +50,8 @@ class AuthController extends GetxController {
 
     user.value = null;
 
-    Get.offAllNamed(Routes.LOGIN.path);
+    // Get.offAllNamed(Routes.LOGIN.path);
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   login(String username, String password) async {
@@ -74,7 +75,8 @@ class AuthController extends GetxController {
 
       appController.setIsLoading(false);
 
-      Get.offAllNamed(Routes.DASHBOARD.path);
+      // Get.offAllNamed(Routes.DASHBOARD.path);
+      Get.offAllNamed(Routes.TIMELINE);
     }
   }
 }
