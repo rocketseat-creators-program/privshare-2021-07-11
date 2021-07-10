@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:get/get_connect/http/src/http.dart';
 import 'package:privshare/modules/timeline/models/timeline_item_model.dart';
 
 class TimelineRepository {
-  // GetHttpClient http = GetHttpClient();
+  GetHttpClient http = GetHttpClient();
 
   List<TimelineItemModel> postsDecoder(response) {
     final _response = json.decode(response) as List<dynamic>;
@@ -15,42 +16,12 @@ class TimelineRepository {
         .toList();
   }
 
-  List<TimelineItemModel> getPosts() {
-    // 'http://o451q.mocklab.io/timeline/posts',
+  Future<List<TimelineItemModel>> getPosts() async {
+    final response = await http.get<List<TimelineItemModel>>(
+      'http://o451q.mocklab.io/timeline/posts',
+      decoder: postsDecoder,
+    );
 
-    return [
-      TimelineItemModel(
-        text: 'Mensagem...',
-        isSubscribersOnly: false,
-      ),
-      TimelineItemModel(
-        text: 'Mensagem 2...',
-        isSubscribersOnly: false,
-      ),
-      TimelineItemModel(
-        text: 'Mensagem para assinantes...',
-        isSubscribersOnly: true,
-      ),
-      TimelineItemModel(
-        text: 'Mensagem 3...',
-        isSubscribersOnly: false,
-      ),
-      TimelineItemModel(
-        text: 'Mensagem 4...',
-        isSubscribersOnly: false,
-      ),
-      TimelineItemModel(
-        text: 'Mensagem para assinantes 2...',
-        isSubscribersOnly: true,
-      ),
-      TimelineItemModel(
-        text: 'Mensagem 5...',
-        isSubscribersOnly: false,
-      ),
-      TimelineItemModel(
-        text: 'Mensagem para assinantes 3...',
-        isSubscribersOnly: true,
-      ),
-    ];
+    return response.body ?? [];
   }
 }
