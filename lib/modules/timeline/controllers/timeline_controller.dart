@@ -14,10 +14,10 @@ class TimelineController {
     getPosts();
   }
 
-  getPosts() async {
+  getPosts() {
     appController.setIsLoading(true);
 
-    posts = await timelineRepository.getPosts();
+    posts = timelineRepository.getPosts();
 
     appController.setIsLoading(false);
   }

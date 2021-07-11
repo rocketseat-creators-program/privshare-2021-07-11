@@ -15,7 +15,7 @@ class TimelineRepository {
         .toList();
   }
 
-  Future<List<TimelineItemModel>> getPosts() async {
+  List<TimelineItemModel> getPosts() {
     // 'http://o451q.mocklab.io/timeline/posts',
 
     return [
