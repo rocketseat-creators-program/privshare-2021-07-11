@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 
@@ -30,7 +31,7 @@ class LoginPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'username',
                 ),
-                validator: (username) => username == null || username.isEmpty
+                validator: (username) => !GetUtils.isUsername(username!)
                     ? 'Username inválido'
                     : null,
               ),
@@ -54,12 +55,10 @@ class LoginPage extends StatelessWidget {
                             usernameCtrl.text,
                             passwordCtrl.text,
                           );
-
-                          Navigator.of(context).pushNamed('timeline');
                         }
                       },
                       icon: Icon(Icons.login),
-                      label: Text('Entre'),
+                      label: Text('Entrar'),
                     ),
                     Row(
                       children: [
@@ -77,9 +76,9 @@ class LoginPage extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        // if (!Get.isSnackbarOpen!) {
-                        //   Get.snackbar('Ops!', 'Tela em construção');
-                        // }
+                        if (!Get.isSnackbarOpen!) {
+                          Get.snackbar('Ops!', 'Tela em construção');
+                        }
                       },
                       child: Text('Cadastre-se'),
                     ),

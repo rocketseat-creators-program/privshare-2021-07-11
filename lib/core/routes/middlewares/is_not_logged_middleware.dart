@@ -1,1 +1,1 @@
-class IsNotLoggedMiddlware {}
+class IsNotLoggedMiddleware {}

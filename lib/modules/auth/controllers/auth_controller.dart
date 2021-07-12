@@ -1,9 +1,11 @@
+import 'package:get/get.dart';
+import 'package:privshare/core/routes/routes.dart';
 import 'package:privshare/modules/app/controllers/app_controller.dart';
 import 'package:privshare/modules/auth/models/user_model.dart';
 import 'package:privshare/modules/auth/repository/auth_repository.dart';
 import 'package:privshare/modules/auth/repository/user_repository.dart';
 
-class AuthController {
+class AuthController extends GetxController {
   final UserRepository userRepository;
   final AuthRepository authRepository;
   final AppController appController;
@@ -13,8 +15,12 @@ class AuthController {
     required this.userRepository,
     required this.authRepository,
     required this.appController,
-  }) {
+  });
+
+  @override
+  void onInit() {
     user = userRepository.getLocalUser();
+    super.onInit();
   }
 
   bool isLoggedIn() => user != null;
@@ -34,7 +40,7 @@ class AuthController {
 
     user = null;
 
-    // Navigate LOGIN
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   login(String username, String password) async {
@@ -50,7 +56,7 @@ class AuthController {
 
       appController.setIsLoading(false);
 
-      // Navigate TIMELINE
+      Get.offAllNamed(Routes.TIMELINE);
     } on String catch (e) {
       appController.setErrorMessage(e);
     }

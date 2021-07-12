@@ -11,7 +11,7 @@ class TimelineController {
     required this.appController,
     required this.timelineRepository,
   }) {
-    getPosts();
+    // getPosts();
   }
 
   getPosts() {
