@@ -6,7 +6,7 @@ import 'package:privshare/modules/timeline/repositories/timeline_repository.dart
 class TimelineController extends GetxController {
   final AppController appController;
   final TimelineRepository timelineRepository;
-  List<TimelineItemModel> posts = [];
+  RxList<TimelineItemModel> posts = RxList();
 
   TimelineController({
     required this.appController,
@@ -22,7 +22,7 @@ class TimelineController extends GetxController {
   getPosts() {
     appController.setIsLoading(true);
 
-    posts = timelineRepository.getPosts();
+    posts.value = timelineRepository.getPosts();
 
     appController.setIsLoading(false);
   }

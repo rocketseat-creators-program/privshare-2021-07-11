@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 import 'package:privshare/modules/timeline/controllers/timeline_controller.dart';
 
@@ -46,42 +47,44 @@ class TimelinePage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: ListView(
-                children: timelineController.posts
-                    .map(
-                      (item) => Card(
-                        color: (item.isSubscribersOnly)
-                            ? Colors.amber
-                            : Colors.blue,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Center(
-                            child: (item.isSubscribersOnly)
-                                ? authController.user?.isSubscriber ?? false
-                                    ? Column(
-                                        children: [
-                                          Image.asset('assets/premium.jpg'),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            item.text,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
+            Obx(
+              () => Expanded(
+                child: ListView(
+                  children: timelineController.posts
+                      .map(
+                        (item) => Card(
+                          color: (item.isSubscribersOnly)
+                              ? Colors.amber
+                              : Colors.blue,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Center(
+                              child: (item.isSubscribersOnly)
+                                  ? authController.user?.isSubscriber ?? false
+                                      ? Column(
+                                          children: [
+                                            Image.asset('assets/premium.jpg'),
+                                            SizedBox(
+                                              height: 10,
                                             ),
-                                          ),
-                                        ],
-                                      )
-                                    : Text(
-                                        'Conteúdo exclusivo para assinantes!')
-                                : Text(item.text),
+                                            Text(
+                                              item.text,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      : Text(
+                                          'Conteúdo exclusivo para assinantes!')
+                                  : Text(item.text),
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               ),
             ),
           ],
