@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:privshare/core/routes/routes.dart';
 import 'package:privshare/modules/auth/controllers/auth_controller.dart';
 
-class IsNotLoggedMiddleware extends GetMiddleware {
+class IsLoggedMiddleware extends GetMiddleware {
   late AuthController _authController;
 
   @override
@@ -11,7 +11,7 @@ class IsNotLoggedMiddleware extends GetMiddleware {
     _authController = Get.find();
 
     return _authController.isLoggedIn()
-        ? RouteSettings(name: Routes.TIMELINE)
-        : null;
+        ? null
+        : RouteSettings(name: Routes.LOGIN);
   }
 }

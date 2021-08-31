@@ -1,10 +1,12 @@
-# privshare
+<img src="https://storage.googleapis.com/golden-wind/experts-club/capa-github.svg" />
 
-Para essa aula vamos falar sobre o controle de estado de feedbacks visuais, mais especificamente o controle dos estados de loading e error de aplicações, usando GetX em Flutter.
+# Criando controle de área logada com GetX e GetStorage
 
-Imagine que estamos atuando em um projeto de desenvolvimento de uma aplicação em que há a necessidade de um formulário de login, aliás é difícil imaginar uma aplicação real que não necessite tratar carregamento e erro.
+Nessa aula vamos utilizar o GetX e o GetStorage para fazer a persistencia e controle do sistema de login do nosso app.
 
-A partir disso vamos implementar esses tratamentos e conhecer e aplicar o GetX para fazer isso de forma elegante e escalável!
+Utilizaremos os middlewares de navegação para a proteção das nossas rotas e redirect de área logada e não logada.
+
+Também veremos como utilizar o GetStorage, como nosso storage local, e armazenar os dados do usuário logado.
 
 ![ezgif-3-96780cef2b24](https://user-images.githubusercontent.com/11702749/125173384-74bf4180-e195-11eb-95d0-087ab28f312a.gif)
 
@@ -12,3 +14,9 @@ A partir disso vamos implementar esses tratamentos e conhecer e aplicar o GetX p
 
 - [GetX](https://pub.dev/packages/get)
 - [Get Storage](https://pub.dev/packages/get_storage)
+
+## Expert
+
+| [<img src="https://avatars.githubusercontent.com/u/11702749?v=4" width="75px;"/>](https://github.com/diego3g) |
+| :-: |
+|[Eliseu Codinhoto](https://github.com/zeucxb)|
