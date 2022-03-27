@@ -6,7 +6,7 @@ import 'package:privshare/modules/timeline/models/timeline_item_model.dart';
 class TimelineRepository {
   GetHttpClient http = GetHttpClient();
 
-  List<TimelineItemModel> postsDecoder(response) {
+  List<TimelineItemModel> _postsDecoder(response) {
     final _response = json.decode(response) as List<dynamic>;
 
     return _response
@@ -19,7 +19,7 @@ class TimelineRepository {
   Future<List<TimelineItemModel>> getPosts() async {
     final response = await http.get<List<TimelineItemModel>>(
       'http://o451q.mocklab.io/timeline/posts',
-      decoder: postsDecoder,
+      decoder: _postsDecoder,
     );
 
     return response.body ?? [];

@@ -11,13 +11,13 @@ class TimelineController {
     required this.appController,
     required this.timelineRepository,
   }) {
-    // getPosts();
+    getPosts();
   }
 
-  getPosts() {
+  getPosts() async {
     appController.setIsLoading(true);
 
-    posts = timelineRepository.getPosts();
+    posts = await timelineRepository.getPosts();
 
     appController.setIsLoading(false);
   }

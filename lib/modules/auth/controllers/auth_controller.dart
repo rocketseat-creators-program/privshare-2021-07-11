@@ -47,8 +47,29 @@ class AuthController extends GetxController {
     appController.setIsLoading(true);
 
     try {
-      // Mock de chamada a uma api (por exemplo)
       final _user = await authRepository.login(username, password);
+
+      userRepository.saveLocalUser(_user);
+
+      user = _user;
+
+      appController.setIsLoading(false);
+
+      Get.offAllNamed(Routes.TIMELINE);
+    } on String catch (e) {
+      appController.setErrorMessage(e);
+    }
+  }
+
+  register(String username, String email, String password) async {
+    appController.setIsLoading(true);
+
+    try {
+      final _user = await authRepository.register(
+        username: username,
+        email: email,
+        password: password,
+      );
 
       userRepository.saveLocalUser(_user);
 
