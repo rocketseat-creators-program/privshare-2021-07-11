@@ -19,10 +19,10 @@ class TimelineController extends GetxController {
     super.onReady();
   }
 
-  getPosts() {
+  getPosts() async {
     appController.setIsLoading(true);
 
-    posts.value = timelineRepository.getPosts();
+    posts.value = await timelineRepository.getPosts();
 
     appController.setIsLoading(false);
   }

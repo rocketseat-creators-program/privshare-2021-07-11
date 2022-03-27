@@ -19,10 +19,12 @@ class TimelinePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Timeline'),
         leading: IconButton(
-          icon: Icon(
-            (authController.user?.isSubscriber ?? false)
-                ? Icons.check_box
-                : Icons.check_box_outline_blank,
+          icon: Obx(
+            () => Icon(
+              (authController.user.value?.isSubscriber ?? false)
+                  ? Icons.check_box
+                  : Icons.check_box_outline_blank,
+            ),
           ),
           onPressed: () => authController.subscribeToggle(),
         ),
@@ -39,7 +41,7 @@ class TimelinePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Bem vindo, ${authController.user?.username ?? ''}',
+              'Bem vindo, ${authController.user.value?.username ?? ''}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -60,7 +62,8 @@ class TimelinePage extends StatelessWidget {
                             padding: const EdgeInsets.all(20),
                             child: Center(
                               child: (item.isSubscribersOnly)
-                                  ? authController.user?.isSubscriber ?? false
+                                  ? authController.user.value?.isSubscriber ??
+                                          false
                                       ? Column(
                                           children: [
                                             Image.asset('assets/premium.jpg'),

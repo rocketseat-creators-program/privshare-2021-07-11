@@ -9,7 +9,7 @@ class AuthController extends GetxController {
   final UserRepository userRepository;
   final AuthRepository authRepository;
   final AppController appController;
-  late UserModel? user;
+  final Rx<UserModel?> user = Rx(null);
 
   AuthController({
     required this.userRepository,
@@ -19,26 +19,33 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
-    user = userRepository.getLocalUser();
+    user.value = userRepository.getLocalUser();
     super.onInit();
   }
 
-  bool isLoggedIn() => user != null;
+  bool isLoggedIn() => user.value != null;
 
   void subscribeToggle() {
-    if (user != null) {
-      user!.isSubscriber = !user!.isSubscriber;
+    if (user.value != null) {
+      user.update((user) {
+        user!.isSubscriber = !user.isSubscriber;
+      });
 
-      userRepository.saveLocalUser(user!);
+      userRepository.saveLocalUser(user.value!);
 
-      if (user!.isSubscriber) {}
+      if (user.value!.isSubscriber) {
+        Get.defaultDialog(
+          title: 'Obrigado por assinar!',
+          middleText: 'Sejá bem vindo ao PrivShare',
+        );
+      }
     }
   }
 
   void logout() {
     userRepository.removeLocalUser();
 
-    user = null;
+    user.value = null;
 
     Get.offAllNamed(Routes.LOGIN);
   }
@@ -52,7 +59,7 @@ class AuthController extends GetxController {
 
       userRepository.saveLocalUser(_user);
 
-      user = _user;
+      user.value = _user;
 
       appController.setIsLoading(true);
 
